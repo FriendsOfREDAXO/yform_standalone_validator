@@ -20,7 +20,7 @@ $validator->setValueArray($input);
 $validator->setValidationArray($rules);
 
 if(!$validator->isValid()) {
-  print_r($validator->getErrors);
+  print_r($validator->getErrors());
 }
 
 ```
