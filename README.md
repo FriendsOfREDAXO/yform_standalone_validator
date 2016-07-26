@@ -10,8 +10,8 @@ $input = [
 ];
 
 $rules = [
-  'empty' => ['first_name', 'Bitte Vornamen angeben.'],
-  'empty' => ['last_name', 'Bitte Nachnahmen angeben.']
+  ['empty' => ['first_name', 'Bitte Vornamen angeben.']],
+  ['empty' => ['last_name', 'Bitte Nachnahmen angeben.']]
 ];
 
 $validator = new standalone_validator();
