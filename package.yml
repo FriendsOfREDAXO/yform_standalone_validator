@@ -1,4 +1,4 @@
-package: yform_standalone-validator
+package: yform_standalone_validator
 version: '1.0'
 author: 'Friends Of REDAXO'
-supportpage: https://github.com/FriendsOfREDAXO/yform_standalone-validator
+supportpage: https://github.com/FriendsOfREDAXO/yform_standalone_validator
