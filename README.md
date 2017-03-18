@@ -25,7 +25,20 @@ if(!$validator->isValid()) {
 
 ```
 
-## Installation
+Installation
+-------
 
-1. Paket im Plugins-Ordner von yform ablegen: `redaxo/src/addons/yform/plugins/standalone-validator`  
-2. Plugin im REDAXO-Adminbereich aktivieren.
+* Paket herunterladen oder über den Installer installieren
+
+
+Changelog
+-------
+
+### Version 1.0 // 18.03.2017
+
+* Umstellung auf eigenständiges AddOn
+* Ausgabe Fehlermeldungen als assoziatives Array
+
+### Version 0.1 // 26.07.2016
+
+* Initial release

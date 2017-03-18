@@ -2,9 +2,14 @@
 
 class standalone_validator extends rex_yform {
 
+    private $fieldnames = [];
+
     public function setValueArray($arr) {
+        $i=0;
         foreach($arr as $key => $val) {
             $this->setValueField('direct_input', [$key, $val]);
+            $this->fieldnames[$i] = $key;
+            $i++;
         }
     }
 
@@ -84,7 +89,12 @@ class standalone_validator extends rex_yform {
     public function getErrors() {
         if(!isset($this->objparams['validated']) || $this->objparams['validated'] != 1)
             $this->validate();
-        return $this->objparams['warning_messages'];
+        $warning_messages = $this->objparams['warning_messages'];
+        $out = [];
+        foreach($warning_messages as $key => $val) {
+            $out[$this->fieldnames[$key]]=$val;
+        }
+        return $out;
     }
 
     public function isValid() {
