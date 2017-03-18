@@ -1,4 +1,4 @@
-# Standalone Validator (YForm-Plugin)
+# Standalone Validator (YForm-Erweiterung)
 
 __Erweiterung__ für das REDAXO-Addon [yform](https://github.com/yakamara/redaxo_yform): Ermöglicht das Validieren von PHP Arrays ohne HTML Formulare. Es können alle YForm Validierungen genutzt werden.
 
