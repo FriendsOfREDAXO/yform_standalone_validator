@@ -34,7 +34,7 @@ Installation
 Changelog
 -------
 
-### Version 1.0 // 18.03.2017
+### Version 1.0.0 // 18.03.2017
 
 * Umstellung auf eigenständiges AddOn
 * Ausgabe Fehlermeldungen als assoziatives Array
