@@ -34,6 +34,10 @@ Installation
 Changelog
 -------
 
+### Version 1.0.1 // 14.07.2019
+
+* Anpassung für YForm 3.1.1
+
 ### Version 1.0.0 // 18.03.2017
 
 * Umstellung auf eigenständiges AddOn
