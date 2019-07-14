@@ -76,7 +76,7 @@ class standalone_validator extends rex_yform {
         }
 
         foreach ($this->objparams['values'] as $i => $valueObject) {
-            $valueObject->setValue($this->getFieldValue($i, '', $valueObject->getName()));
+            $valueObject->setValue($this->getFieldValue($i, [], $valueObject->getName()));
         }
 
         foreach ($this->objparams['validates'] as $Object) {
