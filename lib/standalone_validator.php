@@ -1,64 +1,58 @@
 <?php
 
-class standalone_validator extends rex_yform {
+class standalone_validator extends rex_yform
+{
+    private $fieldNames = [];
 
-    private $fieldnames = [];
-
-    public function setValueArray($arr) {
-        $i=0;
-        foreach($arr as $key => $val) {
+    public function setValueArray($arr): void
+    {
+        $i = 0;
+        foreach ($arr as $key => $val) {
             $this->setValueField('direct_input', [$key, $val]);
-            $this->fieldnames[$i] = $key;
-            $i++;
+            $this->fieldNames[$i] = $key;
+            ++$i;
         }
     }
 
-    public function setValidationArray($arr) {
-        foreach($arr as $item) {
-            foreach($item as $key => $val) {
+    public function setValidationArray($arr): void
+    {
+        foreach ($arr as $item) {
+            foreach ($item as $key => $val) {
                 $this->setValidateField($key, $val);
             }
         }
     }
 
-    public function validate() {
-
+    public function validate(): void
+    {
         $this->objparams['values'] = [];
         $this->objparams['validates'] = [];
         $this->objparams['actions'] = [];
-
         $this->objparams['fields'] = [];
-
         $this->objparams['fields']['values'] = &$this->objparams['values'];
         $this->objparams['fields']['validates'] = &$this->objparams['validates'];
         $this->objparams['fields']['actions'] = &$this->objparams['actions'];
-
         $this->objparams['send'] = 1;
 
         $rows = count($this->objparams['form_elements']);
 
         for ($i = 0; $i < $rows; ++$i) {
-
             $element = $this->objparams['form_elements'][$i];
 
-            if ($element[0] == 'validate') {
+            if ('validate' == $element[0]) {
                 $class = 'rex_yform_validate_' . trim($element[1]);
-
             } else {
                 $class = 'rex_yform_value_' . trim($element[0]);
-
             }
 
             if (class_exists($class)) {
-
-                if ($element[0] == 'validate') {
+                if ('validate' == $element[0]) {
                     $class = 'rex_yform_validate_' . trim($element[1]);
                     $this->objparams['validates'][$i] = new $class();
                     $this->objparams['validates'][$i]->loadParams($this->objparams, $element);
                     $this->objparams['validates'][$i]->setId($i);
                     $this->objparams['validates'][$i]->init();
                     $this->objparams['validates'][$i]->setObjects($this->objparams['values']);
-
                 } else {
                     $class = 'rex_yform_value_' . trim($element[0]);
                     $this->objparams['values'][$i] = new $class();
@@ -67,16 +61,14 @@ class standalone_validator extends rex_yform {
                     $this->objparams['values'][$i]->init();
                     $this->objparams['values'][$i]->setObjects($this->objparams['values']);
                     $rows = count($this->objparams['form_elements']);
-
                 }
             } else {
-                echo 'Class does not exist "'.$class.'" ';
+                echo 'Class does not exist "' . $class . '" ';
             }
-
         }
 
         foreach ($this->objparams['values'] as $i => $valueObject) {
-            $valueObject->setValue($this->getFieldValue($i, [], $valueObject->getName()));
+            $valueObject->setValue($this->getFieldValue($i, []));
         }
 
         foreach ($this->objparams['validates'] as $Object) {
@@ -86,23 +78,31 @@ class standalone_validator extends rex_yform {
         $this->objparams['validated'] = 1;
     }
 
-    public function getErrors() {
-        if(!isset($this->objparams['validated']) || $this->objparams['validated'] != 1)
+    public function getErrors(): array
+    {
+        if (!isset($this->objparams['validated']) || 1 != $this->objparams['validated']) {
             $this->validate();
+        }
+
         $warning_messages = $this->objparams['warning_messages'];
         $out = [];
-        foreach($warning_messages as $key => $val) {
-            $out[$this->fieldnames[$key]]=$val;
+        foreach ($warning_messages as $key => $val) {
+            $out[$this->fieldNames[$key]] = $val;
         }
+
         return $out;
     }
 
-    public function isValid() {
-        if(!isset($this->objparams['validated']) || $this->objparams['validated'] != 1)
+    public function isValid(): bool
+    {
+        if (!isset($this->objparams['validated']) || 1 != $this->objparams['validated']) {
             $this->validate();
-        if(count($this->objparams['warning']))
+        }
+
+        if (count($this->objparams['warning'])) {
             return false;
+        }
+
         return true;
     }
-
 }
