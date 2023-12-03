@@ -34,7 +34,7 @@ Installation
 Changelog
 -------
 
-### Version 1.1.0 // 14.07.2019
+### Version 1.1.0 // 03.12.2023
 
 * Anpassung für YForm 4
 
